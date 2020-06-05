@@ -36,6 +36,18 @@ module.exports = {
           use: ["css-loader", "sass-loader"],
         }),
       },
+      //对图片的配置
+      {
+        test: /\.(png|jpg|gif)$/i,
+        use: [
+          {
+            loader: "url-loader",
+            options: {
+              limit: 8192,
+            },
+          },
+        ],
+      },
     ],
   },
   plugins: [
