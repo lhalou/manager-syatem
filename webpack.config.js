@@ -9,6 +9,7 @@ module.exports = {
   },
   module: {
     rules: [
+      //react(jsx)文件的处理
       {
         test: /\.jsx$/,
         exclude: /(node_modules)/,
@@ -19,11 +20,20 @@ module.exports = {
           },
         },
       },
+      //css文件的处理
       {
         test: /\.css$/i,
         use: ExtractTextPlugin.extract({
           fallback: "style-loader",
           use: "css-loader",
+        }),
+      },
+      //sass文件的处理
+      {
+        test: /\.scss$/,
+        use: ExtractTextPlugin.extract({
+          fallback: "style-loader",
+          use: ["css-loader", "sass-loader"],
         }),
       },
     ],
