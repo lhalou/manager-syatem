@@ -48,6 +48,18 @@ module.exports = {
           },
         ],
       },
+      //字体图标的配置
+      {
+        test: /\.(eot|svg|ttf|woff|woff2|otf)$/i,
+        use: [
+          {
+            loader: "url-loader",
+            options: {
+              limit: 8192,
+            },
+          },
+        ],
+      },
     ],
   },
   plugins: [
