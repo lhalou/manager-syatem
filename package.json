@@ -5,6 +5,10 @@
   "repository": "git@github.com:lhalou/manager-syatem.git",
   "author": "lliqi <614124284@qq.com>",
   "license": "MIT",
+  "scripts": {
+    "dev": "node_modules/.bin/webpack-dev-server",
+    "dist": "node_modules/.bin/webpack"
+  },
   "devDependencies": {
     "babel-core": "6.26.0",
     "babel-loader": "7.1.2",
