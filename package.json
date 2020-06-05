@@ -1,0 +1,8 @@
+{
+  "name": "manager-syatem",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:lhalou/manager-syatem.git",
+  "author": "lliqi <614124284@qq.com>",
+  "license": "MIT"
+}
