@@ -5,7 +5,6 @@ import "./index.css";
 import "./index.scss";
 ReactDOM.render(
   <div>
-    <i className="fa fa-address-book"></i>
     <h1>hello</h1>
   </div>,
 

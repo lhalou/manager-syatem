@@ -79,5 +79,7 @@ module.exports = {
       filename: "js/base.js",
     }),
   ],
-  devServer: {},
+  devServer: {
+    port: 8086,
+  },
 };
