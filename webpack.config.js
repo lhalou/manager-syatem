@@ -1,7 +1,7 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 module.exports = {
-  entry: "./src/app.js",
+  entry: "./src/app.jsx",
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "app.js",
@@ -9,12 +9,12 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.jsx$/,
         exclude: /(node_modules)/,
         use: {
           loader: "babel-loader",
           options: {
-            presets: ["env"],
+            presets: ["env", "react"],
           },
         },
       },
