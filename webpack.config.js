@@ -15,7 +15,9 @@ module.exports = {
     alias: {
       //在当前所在目录，根目录下去找src/page
       page: path.resolve(__dirname, "src/page"),
-      component: path.resolve(__dirname, "src/component")
+      component: path.resolve(__dirname, "src/component"),
+      util: path.resolve(__dirname, "src/util"),
+      service: path.resolve(__dirname, "src/service")
     }
   },
   module: {
@@ -90,6 +92,12 @@ module.exports = {
     //即使访问404，也可以跳转到正确的页面
     historyApiFallback: {
       index: "/dist/index.html"
+    },
+    proxy: {
+      '/manage': {
+        target: 'http://admintest.happymmall.com',
+        changeOrigin: true
+      }
     }
   },
 };
