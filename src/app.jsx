@@ -8,6 +8,7 @@ import Layout from "component/layout/index.jsx"
 //page路径在webpack.config.json中设置了
 import Home from "page/home/index.jsx"
 import Login from "page/login/index.jsx"
+import ErrorPage from "page/error/index.jsx"
 class App extends Component {
   render(){
     return (
@@ -20,6 +21,7 @@ class App extends Component {
                 <Route path = "/" exact component = {Home} />
                 <Route path = "/product" exact component = {Home} />
                 <Route path = "/product-category" exact component = {Home} />
+                <Route component  = {ErrorPage}/>
               </Switch>
             </Layout>  
           )}/>
