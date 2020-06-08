@@ -10,7 +10,8 @@ class UserList extends Component {
     super(props),
     this.state = {
       pageNum: 1,
-      list: []
+      list: [],
+      firstLoading: true
     }
   }
   componentDidMount(){
@@ -19,7 +20,11 @@ class UserList extends Component {
 
   loadUserList(){
     _user.getUserList(this.state.pageNum).then((res) => {
-      this.setState(res)
+      this.setState(res,() => {
+        this.setState({
+          firstLoading: false
+        })
+      })
     },errMsg => {
       _mm.errorTips(errMsg)
     })
@@ -45,7 +50,10 @@ class UserList extends Component {
                   });
     let listError = (
       <tr>
-        <td colSpan = "5" className = "text-center">没有找到相应的结果</td>
+        <td colSpan = "5" className = "text-center">
+        {this.state.firstLoading ? "正在加载。。。。": "没有找到相应的结果"}
+        
+        </td>
       </tr>
     )
     let tableBody = this.state.list.length > 0 ? listBody : listError
