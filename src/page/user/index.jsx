@@ -44,7 +44,7 @@ class UserList extends Component {
                         <td>{user.username}</td>
                         <td>{user.email}</td>
                         <td>{user.phone}</td>
-                        <td>{user.createTime}</td>
+                        <td>{new Date(user.createTime).toLocaleString()}</td>
                       </tr>
                     )
                   });
