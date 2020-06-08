@@ -26,6 +26,9 @@ class UserList extends Component {
         })
       })
     },errMsg => {
+      this.setState ({
+        list: []
+      })
       _mm.errorTips(errMsg)
     })
   }
