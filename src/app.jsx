@@ -9,6 +9,7 @@ import Layout from "component/layout/index.jsx"
 import Home from "page/home/index.jsx"
 import Login from "page/login/index.jsx"
 import ErrorPage from "page/error/index.jsx"
+import UserList from "page/user/index.jsx"
 class App extends Component {
   render(){
     return (
@@ -21,6 +22,8 @@ class App extends Component {
                 <Route path = "/" exact component = {Home} />
                 <Route path = "/product" exact component = {Home} />
                 <Route path = "/product-category" exact component = {Home} />
+                <Route path = "/user/index" component = {UserList}/>
+                <Redirect exact from = "/user" to = "/user/index"/>
                 <Route component  = {ErrorPage}/>
               </Switch>
             </Layout>  
