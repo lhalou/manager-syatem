@@ -45,6 +45,7 @@ class Login extends Component {
       _user.login(loginInfo).then((res)=>{
         //react-router提供的history对象
         console.log(this.state.redirect)
+        _mm.setStorage('userInfo',res)
         this.props.history.push(this.state.redirect)
       },(errMsg)=>{
         _mm.errorTips(errMsg)

@@ -39,5 +39,31 @@ class MUtil {
   errorTips(errMsg){
     alert(errMsg || "好像哪里出问题了")
   }
+  //本地存储数据
+  setStorage(name,data){
+    let dataType = typeof data
+    //json对象
+    if(dataType === "object"){
+      window.localStorage.setItem(name,JSON.stringify(data))
+    }else if(['number','boolean','string'].indexOf(dataType)){
+       window.localStorage.setItem(name,data)
+    }else{
+      alert("该类型不支持数据转换")
+    }
+  }
+  //去除本地存储
+  getStorage(name){
+    let data = window.localStorage.getItem(name)
+    if(data){
+      return JSON.parse(data)
+    }else {
+      return ''
+    }
+  }
+  //删除本地存储
+  removeStorage(name){
+    window.localStorage.removeItem(name)
+  }
+  
 }
 export default MUtil
