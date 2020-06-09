@@ -3,6 +3,7 @@ import {Link} from "react-router-dom"
 import PageTitle from "component/page-title/index.jsx"
 import Pagination from "util/pagination/index.jsx"
 import Product from "service/product-service.jsx"
+import ListSearch from "./index-list-search.jsx"
 import Util from "util/mm.jsx"
 import TableList from "util/table-list/index.jsx"
 import "./index.scss"
@@ -14,15 +15,35 @@ class ProductList extends Component {
     super(props),
     this.state = {
       pageNum: 1,
-      list: [] 
+      list: [] ,
+      listType: 'list'
     }
   }
   componentDidMount(){
     this.loadProductList()
   }
+  //搜索
+  handleSearch(searchType,searchKeyword){
+    let listType = searchKeyword === "" ? "list" : "search"
+    this.setState({
+      listType: listType,
+      pageNum:1,
+      searchTtype: searchType,
+      searchKeyword: searchKeyword
+    },() => {
+      this.loadProductList()
+    })
+  }
   //加载商品列表
   loadProductList(){
-    _product.getProductList(this.state.pageNum).then((res) => {
+    let listParam = {}
+    listParam.listType = this.state.listType
+    listParam.pageNum = this.state.pageNum
+    if(this.state.listType === "search"){
+      listParam.searchType = this.state.searchType
+      listParam.keyword = this.state.searchKeyword
+    }
+    _product.getProductList(listParam).then((res) => {
       this.setState(res)
     },errMsg => {
       this.setState ({
@@ -31,6 +52,8 @@ class ProductList extends Component {
       _mm.errorTips(errMsg)
     })
   }
+  
+  //切换页面
   handleChangePage(pageNum){
     this.setState({
       pageNum: pageNum
@@ -64,22 +87,7 @@ class ProductList extends Component {
     return (
       <div id = "page-wrapper">
         <PageTitle title = "商品列表"/>
-        <div className="row">
-          <div className="col-md-12">
-            <div className="form-inline">
-              <div className="form-group">
-                <select className="form-control">
-                  <option value = "productId">按商品ID查询</option>
-                  <option value = "productName">按商品名称查询</option>
-                </select>
-              </div>
-              <div className="form-group">
-                <input type="text" className = "form-control" placeholder = "关键词"/>
-                <button className="btn btn-primary">搜索</button>
-              </div>
-            </div>
-          </div>
-        </div>
+        <ListSearch onSearch = {(searchTtype,searchKeyword) => {this.handleSearch(searchTtype,searchKeyword)}}/>
         <TableList tableHeaders = {tableHeads}>
           {
             this.state.list.map((product,index) => {
