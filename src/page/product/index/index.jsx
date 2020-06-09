@@ -20,7 +20,7 @@ class ProductList extends Component {
   componentDidMount(){
     this.loadProductList()
   }
-
+  //加载商品列表
   loadProductList(){
     _product.getProductList(this.state.pageNum).then((res) => {
       this.setState(res)
@@ -64,6 +64,22 @@ class ProductList extends Component {
     return (
       <div id = "page-wrapper">
         <PageTitle title = "商品列表"/>
+        <div className="row">
+          <div className="col-md-12">
+            <div className="form-inline">
+              <div className="form-group">
+                <select className="form-control">
+                  <option value = "productId">按商品ID查询</option>
+                  <option value = "productName">按商品名称查询</option>
+                </select>
+              </div>
+              <div className="form-group">
+                <input type="text" className = "form-control" placeholder = "关键词"/>
+                <button className="btn btn-primary">搜索</button>
+              </div>
+            </div>
+          </div>
+        </div>
         <TableList tableHeaders = {tableHeads}>
           {
             this.state.list.map((product,index) => {
