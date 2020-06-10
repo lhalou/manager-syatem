@@ -2,6 +2,7 @@ import React,{Component} from "react"
 import PageTitle from "component/page-title/index.jsx"
 import Product from "service/product-service.jsx"
 import Util from "util/mm.jsx"
+import FileUpLoader from "util/file_uploader/index.jsx"
 import CategorySelector from "./category-selector.jsx"
 const _mm = new Util()
 const _product = new Product()
@@ -21,7 +22,7 @@ class ProductSave extends Component {
     return(
       <div id = "page-wrapper">
         <PageTitle title = "添加商品" />
-          <form className="form-horizontal">
+          <div className="form-horizontal">
             <div className="form-group">
              <label className="col-md-2 control-label">商品名称</label>
               <div className="col-md-5">
@@ -61,7 +62,7 @@ class ProductSave extends Component {
             <div className="form-group">
               <label className="col-md-2 control-label">商品图片</label>
               <div className="col-md-10">
-                xxxx
+                <FileUpLoader/>
               </div>
             </div>
             <div className="form-group">
@@ -75,7 +76,7 @@ class ProductSave extends Component {
                 <button type="submit" className="btn btn-primary">提交</button>
               </div>
             </div>
-        </form>
+        </div>
       </div>
       )
   }
