@@ -86,7 +86,14 @@ class ProductList extends Component {
     ]
     return (
       <div id = "page-wrapper">
-        <PageTitle title = "商品列表"/>
+        <PageTitle title = "商品列表">
+          <div className="page-height-right">
+            <Link to = "/product/save" className = "btn btn-primary">
+              <i className="fa fa-plus"></i>
+              <span>添加商品</span>
+            </Link>
+          </div>
+        </PageTitle>
         <ListSearch onSearch = {(searchTtype,searchKeyword) => {this.handleSearch(searchTtype,searchKeyword)}}/>
         <TableList tableHeaders = {tableHeads}>
           {
