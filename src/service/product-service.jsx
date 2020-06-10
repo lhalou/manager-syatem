@@ -26,5 +26,16 @@ class Product{
       data: productInfo
     })
   }
+
+  //品类管理相关
+  getCategoryList(parentCategoryId){
+    return _mm.request({
+      type: "post",
+      url: "/manage/category/get_category.do",
+      data: {
+        categoryId: parentCategoryId
+      }
+    })
+  }
 }
 export default Product
