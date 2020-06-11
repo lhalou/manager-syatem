@@ -49,6 +49,9 @@ class CategorySelector extends Component {
   }
   //选择一级品类
   handleFirstCategoryList(e){
+    if(this.props.readOnly){
+      return;
+    }
     let newValue = e.target.value
     this.setState({
       //选中一级品类，并清空二级品类
@@ -63,6 +66,9 @@ class CategorySelector extends Component {
   }
   //加载二级品类
   loadSecondCategory(){
+    if(this.props.readOnly){
+      return;
+    }
      _product.getCategoryList(this.state.firstCategoryId).then(res => {
       
       this.setState({
@@ -97,6 +103,7 @@ class CategorySelector extends Component {
        <div className="col-md-10">
         <select className="form-control cate-select"
         value = {this.state.firstCategoryId}
+        readOnly = {this.props.readOnly}
         onChange = {(e) => {this.handleFirstCategoryList(e)}}
         >
           <option value = "" className = "cate-option">请选择一级分类</option>
@@ -111,6 +118,7 @@ class CategorySelector extends Component {
           this.state.secondCategoryList.length ? 
              (<select name = "" className="form-control cate-select"
              value = {this.state.secondCategoryId }
+             readOnly = {this.props.readOnly}
              onChange = {(e) => {this.handleSecondCategoryList(e)}}
              >
                 <option value = "">请选择二级分类</option>
