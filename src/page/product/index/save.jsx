@@ -36,7 +36,8 @@ class ProductSave extends Component {
   }  
   //删除图片
   handleDeleteImage(e){
-    let index = e.target.index
+    //采用e.target.index获取不到index
+    let index = parseInt(e.target.getAttribute('index'))
     let subImages = this.state.subImages
     subImages.splice(index,1)
     this.setState({
