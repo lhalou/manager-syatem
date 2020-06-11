@@ -8,7 +8,8 @@ class ProductRouter extends Component {
     return (
       <Switch>
         <Route path = "/product/index" component = {ProductList}/>
-        <Route path = "/product/save/:pid" component = {ProductSave} />
+        {/* ?表示可选的 */}
+        <Route path = "/product/save/:pid?" component = {ProductSave} />
         <Route path = "/product/detail/:pid" component = {ProductDetail} />
         <Redirect exact from = "/product" to = "/product/index"/> 
       </Switch>
