@@ -11,6 +11,7 @@ class ProductSave extends Component {
   constructor(props){
     super(props),
     this.state = {
+      id: this.props.match.params.pid,
       name: '',
       subtitle: '',
       price: '',
@@ -22,6 +23,26 @@ class ProductSave extends Component {
       detail : ''
     }
     this.handleCateGoryChange = this.handleCateGoryChange.bind(this)
+  }
+  componentDidMount(){
+    this.loadProduct() //加载商品详情
+  }
+  loadProduct(){
+    //有Id的时候表示编辑功能，需要表单回填。
+    if(this.state.id){
+      _product.getProduct(this.state.id).then((res) => {
+        let images = res.subImages.split(',')
+        res.subImages = images.map((imgUri) => {
+          return {
+            uri: imgUri,
+            url: res.imageHost + imgUri
+          }
+        })
+        this.setState(res)
+      },(errMsg) => {
+        _mm.errorTips(errMsg)
+      })
+    }
   }
   //简单字段变化处理
   handleInputChange(e){
@@ -99,6 +120,7 @@ class ProductSave extends Component {
               <div className="col-md-5">
                 <input type="text" className="form-control" placeholder="请输入商品名称"
                   name = "name"
+                  value = {this.state.name}
                   onChange = {(e) => this.handleInputChange(e)}
                 />
               </div>
@@ -108,13 +130,17 @@ class ProductSave extends Component {
               <div className="col-md-5">
                 <input type="text" className="form-control" placeholder="请输入商品描述"
                   name = "subtitle"
+                  value = {this.state.subtitle}
                   onChange = {(e) => this.handleInputChange(e)}
                 />
               </div>
             </div>
             <div className="form-group">
               <label className="col-md-2 control-label">所属分类</label>
-              <CategorySelector onCategoryChange = {
+              <CategorySelector 
+                categoryId = {this.state.categoryId}
+                parentCategoryId = {this.state.parentCategoryId}
+                onCategoryChange = {
                  (categoryId,parentCategoryId) => {this.handleCateGoryChange(categoryId,parentCategoryId)}}
                  />
             </div>
@@ -124,6 +150,7 @@ class ProductSave extends Component {
                 <div className="input-group">
                   <input type="number" className="form-control" placeholder="请输入商品价格"
                     name = "price"
+                    value = {this.state.price}
                     onChange = {(e) => this.handleInputChange(e)}
                   />
                   <span className="input-group-addon" >元</span>
@@ -136,6 +163,7 @@ class ProductSave extends Component {
                 <div className="input-group">
                     <input type="number" className="form-control" placeholder="库存"
                       name = "stock"
+                      value = {this.state.stock}
                     onChange = {(e) => this.handleInputChange(e)}
                     />
                     <span className="input-group-addon" >件</span>

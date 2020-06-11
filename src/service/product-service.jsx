@@ -66,6 +66,15 @@ class Product{
     
     return result
   }
+  getProduct(productId){
+    return _mm.request({
+      type: "post",
+      url: "/manage/product/detail.do",
+      data: {
+        productId: productId || 0
+      }
+    })
+  }
   saveProduct(product){
      return _mm.request({
       type: "post",
