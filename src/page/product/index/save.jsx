@@ -99,6 +99,10 @@ class ProductSave extends Component {
       detail : this.state.detail
     }
     let productCheckResult = _product.checkProduct(product)
+    if(this.state.id){
+      product.id = this.state.id
+    }
+   
     if(productCheckResult.status){
       _product.saveProduct(product).then((res) => {
         _mm.successTips(res)
