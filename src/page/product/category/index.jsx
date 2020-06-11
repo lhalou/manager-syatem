@@ -1,7 +1,7 @@
 import React,{Component} from "react"
 import {Link} from "react-router-dom"
 import PageTitle from "component/page-title/index.jsx"
-
+import "./index.scss"
 import TableList from "util/table-list/index.jsx"
 import Product from "service/product-service.jsx"
 import Util from "util/mm.jsx"
@@ -17,6 +17,19 @@ class CategoryList extends Component {
   }
   componentDidMount(){
     this.loadCategoryList()
+  }
+  //对耳机分类进行检索
+  componentWillUpdate(prevProps,prevState){
+    let oldPath = prevProps.location.pathname
+    let newPath = this.props.location.pathname
+    let newId = this.props.match.params.categoryId || 0
+    if(oldPath !== newPath){
+      this.setState({
+        parentCategoryId: newId
+      },() => {
+        this.loadCategoryList()
+      })
+    }
   }
   //加载品类列表
   loadCategoryList(){
@@ -52,10 +65,15 @@ class CategoryList extends Component {
                       <tr key = {index}>
                         <td>{category.id}</td>
                         <td>{category.name}</td>
-                        <td>
-                          <a className="opera"
+                        <td className = "td-font-size">
+                          <a className="opera "
                           onClick = {(e) => this.handleUpdateName(category.id,category.name)}
                           >修改名称</a>
+                          {
+                            category.parentId === 0 
+                            ? <Link to = {`/product-category/index/${category.id}`}>查看子品类</Link>
+                            : null
+                          }
                         </td> 
                       </tr>
                     )
