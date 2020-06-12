@@ -2,12 +2,14 @@ const path = require("path");
 const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
+let WEBPACK_ENV = process.env.WEBPACK_ENV || 'dev'
+console.log(WEBPACK_ENV)
 module.exports = {
   entry: "./src/app.jsx",
   output: {
     //在当前所在目录，也就是根目录下去找dist
     path: path.resolve(__dirname, "dist"),
-    publicPath: "/dist/",
+    publicPath: WEBPACK_ENV === 'dev' ? "/dist/" : "/s.jianliwu.com/admin-ve-fe/dist/" ,
     filename: "js/app.js",
   },
   //配置路径，便于文件位置的更改
